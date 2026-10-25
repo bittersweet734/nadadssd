@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>A Little Love, Just for You</title>
+    <meta name="description" content="A tiny door to something lovely. Enter your four-digit code and pick a song.">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <svg style="display:none" aria-hidden="true">
+        <symbol id="heart" viewBox="0 0 24 24">
+            <path
+                d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z" />
+        </symbol>
+        <symbol id="lock" viewBox="0 0 24 24">
+            <rect x="5" y="10" width="14" height="11" rx="3" />
+            <path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3" />
+        </symbol>
+        <symbol id="note" viewBox="0 0 24 24">
+            <path d="M9 18V5l12-2v13M9 8l12-2" />
+            <ellipse cx="6" cy="18" rx="3" ry="3" />
+            <ellipse cx="18" cy="16" rx="3" ry="3" />
+        </symbol>
+    </svg>
+    <header>
+        <div class="brand"><svg>
+                <use href="#heart" />
+            </svg> A little love</div>
+        <div class="music">
+    <button
+        class="music-toggle"
+        id="musicToggle"
+        aria-expanded="false"
+        aria-controls="musicPanel"
+    >
+        <svg><use href="#note" /></svg>
+        <span id="musicLabel">Pick our song</span>
+        <span aria-hidden="true">⌄</span>
+    </button>
+
+    <section class="music-panel" id="musicPanel" hidden>
+        <strong>Set the mood</strong>
+        <p>Choose a song for our little moment.</p>
+
+        <label class="upload">
+            Choose audio files
+            <input
+                id="files"
+                type="file"
+                accept="audio/*"
+                multiple
+                hidden
+            >
+        </label>
+
+        <select id="songs" aria-label="Choose a song">
+            <option value="">Choose our song</option>
+            <option value="assets/songs/Very Special Love.mp3">
+                Very Special Love
+            </option>
+            <option value="assets/songs/When Love And Hate Collide.mp3">
+                When Love And Hate Collide
+            </option>
+            <option value="assets/songs/Dear.mp3">
+                Dear
+            </option>
+            <option value="assets/songs/Can't Help Falling in Love.mp3">
+                Can't Help Falling in Love
+            </option>
+            <option value="assets/songs/Na Para Bang.mp3">
+                Na Para Bang
+            </option>
+        </select>
+
+        <audio id="audio" controls loop preload="metadata"></audio>
+
+        <p id="musicStatus" aria-live="polite">
+            Our song starts on your first tap.
+        </p>
+    </section>
+</div>
+    </header>
+    <main>
+        <section class="card" aria-labelledby="title">
+            <div class="emblem"><svg>
+                    <use id="emblemIcon" href="#lock" />
+                </svg></div>
+            <div class="eyebrow">JUST FOR YOUR YOU</div>
+            <h1 id="title">A little secret.<br><em>A lot of love.</em></h1>
+            <p class="subtitle" id="subtitle">Some things are only meant for you.<br>Enter our 4-digit code to unlock.
+            </p>
+            <div id="entry">
+                <div class="digits" aria-label="Passcode: 0 of 4 digits entered" role="status" id="dots"><span
+                        class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                </div>
+                <div class="keypad" aria-label="Passcode keypad"><button data-digit="1">1</button><button
+                        data-digit="2">2</button><button data-digit="3">3</button><button
+                        data-digit="4">4</button><button data-digit="5">5</button><button
+                        data-digit="6">6</button><button data-digit="7">7</button><button
+                        data-digit="8">8</button><button data-digit="9">9</button><button class="small"
+                        id="clear">CLEAR</button><button data-digit="0">0</button><button id="back"
+                        aria-label="Delete last digit"><svg viewBox="0 0 24 24">
+                            <path d="M9 5h12v14H9l-7-7 7-7ZM12 9l6 6m0-6-6 6" />
+                        </svg></button></div><button class="unlock" id="unlock">Unlock our little world <span
+                        aria-hidden="true">→</span></button>
+            </div>
+            <form id="nameForm" hidden novalidate><label class="name-label" for="herName">Your name</label><input
+                    class="name-input" id="herName" name="herName" type="text" autocomplete="given-name"
+                    placeholder="Enter your name" maxlength="60" required aria-describedby="status"><button
+                    class="unlock" type="submit">Next <span aria-hidden="true">→</span></button></form>
+            <div id="proposal" hidden><img class="bear-gif" src="assets/love-bears.gif"
+                    alt="Two cuddly bears holding a gently beating heart" width="420" height="240">
+                <div class="choices"><button class="yes-btn" id="yesBtn" type="button">Yes</button><button
+                        class="no-btn" id="noBtn" type="button">No</button></div>
+                <p class="question-note" id="questionNote" aria-live="polite">A little question, straight from my heart.
+                </p>
+            </div>
+            <form id="dateForm" hidden>
+                <div class="date-fields"><label for="date">What date works for you?<input id="date" name="date"
+                            type="date" required></label><label for="time">And what time?<input id="time" name="time"
+                            type="time" required></label></div><button class="unlock" type="submit">It's a date <span
+                        aria-hidden="true">→</span></button>
+                <p class="date-summary" id="dateSummary" aria-live="polite"></p>
+            </form>
+            <section id="flowerEnding" hidden aria-label="Flowers and a letter for you">
+                <div class="flower-scene" aria-label="Three pink flowers growing with gently falling leaves" role="img">
+                    <svg class="flower-art" viewBox="0 0 420 365" aria-hidden="true">
+                        <g style="--grow-delay:0.3s">
+                            <path class="growing-stem" d="M210 338 Q130 250 105 147" pathLength="1" />
+                            <g class="plant-leaf" style="transform-origin:115px 245px">
+                                <path d="M115 245 Q40 243 54 201 Q104 202 115 245" fill="#779b76" stroke="none" />
+                            </g>
+                            <g class="plant-leaf" style="transform-origin:117px 269px">
+                                <path d="M117 269 Q185 267 170 226 Q125 229 117 269" fill="#99b58b" stroke="none" />
+                            </g>
+                            <g transform="translate(105 147) rotate(-16)">
+                                <g class="flower-bloom" stroke="none">
+                                    <ellipse cx="0" cy="-22" rx="15" ry="25" transform="rotate(0)" fill="#eaa0b7" />
+                                    <ellipse cx="0" cy="-22" rx="15" ry="25" transform="rotate(60)" fill="#eaa0b7" />
+                                    <ellipse cx="0" cy="-22" rx="15" ry="25" transform="rotate(120)" fill="#eaa0b7" />
+                                    <ellipse cx="0" cy="-22" rx="15" ry="25" transform="rotate(180)" fill="#eaa0b7" />
+                                    <ellipse cx="0" cy="-22" rx="15" ry="25" transform="rotate(240)" fill="#eaa0b7" />
+                                    <ellipse cx="0" cy="-22" rx="15" ry="25" transform="rotate(300)" fill="#eaa0b7" />
+                                    <circle r="15" fill="#f6d9a0" />
+                                    <circle r="7" fill="#d9a969" />
+                                </g>
+                            </g>
+                        </g>
+                        <g style="--grow-delay:0s">
+                            <path class="growing-stem" d="M210 338 Q236 250 211 87" pathLength="1" />
+                            <g class="plant-leaf" style="transform-origin:221px 245px">
+                                <path d="M221 245 Q146 243 160 201 Q210 202 221 245" fill="#779b76" stroke="none" />
+                            </g>
+                            <g class="plant-leaf" style="transform-origin:223px 269px">
+                                <path d="M223 269 Q291 267 276 226 Q231 229 223 269" fill="#99b58b" stroke="none" />
+                            </g>
+                            <g transform="translate(211 87) rotate(3)">
+                                <g class="flower-bloom" stroke="none">
+                                    <ellipse cx="0" cy="-22" rx="15" ry="25" transform="rotate(0)" fill="#dc769b" />
+                                    <ellipse cx="0" cy="-22" rx="15" ry="25" transform="rotate(60)" fill="#dc769b" />
+                                    <ellipse cx="0" cy="-22" rx="15" ry="25" transform="rotate(120)" fill="#dc769b" />
+                                    <ellipse cx="0" cy="-22" rx="15" ry="25" transform="rotate(180)" fill="#dc769b" />
+                                    <ellipse cx="0" cy="-22" rx="15" ry="25" transform="rotate(240)" fill="#dc769b" />
+                                    <ellipse cx="0" cy="-22" rx="15" ry="25" transform="rotate(300)" fill="#dc769b" />
+                                    <circle r="15" fill="#f6d9a0" />
+                                    <circle r="7" fill="#d9a969" />
+                                </g>
+                            </g>
+                        </g>
+                        <g style="--grow-delay:0.6s">
+                            <path class="growing-stem" d="M210 338 Q333 250 308 149" pathLength="1" />
+                            <g class="plant-leaf" style="transform-origin:318px 245px">
+                                <path d="M318 245 Q243 243 257 201 Q307 202 318 245" fill="#779b76" stroke="none" />
+                            </g>
+                            <g class="plant-leaf" style="transform-origin:320px 269px">
+                                <path d="M320 269 Q388 267 373 226 Q328 229 320 269" fill="#99b58b" stroke="none" />
+                            </g>
+                            <g transform="translate(308 149) rotate(15)">
+                                <g class="flower-bloom" stroke="none">
+                                    <ellipse cx="0" cy="-22" rx="15" ry="25" transform="rotate(0)" fill="#f2bbc8" />
+                                    <ellipse cx="0" cy="-22" rx="15" ry="25" transform="rotate(60)" fill="#f2bbc8" />
+                                    <ellipse cx="0" cy="-22" rx="15" ry="25" transform="rotate(120)" fill="#f2bbc8" />
+                                    <ellipse cx="0" cy="-22" rx="15" ry="25" transform="rotate(180)" fill="#f2bbc8" />
+                                    <ellipse cx="0" cy="-22" rx="15" ry="25" transform="rotate(240)" fill="#f2bbc8" />
+                                    <ellipse cx="0" cy="-22" rx="15" ry="25" transform="rotate(300)" fill="#f2bbc8" />
+                                    <circle r="15" fill="#f6d9a0" />
+                                    <circle r="7" fill="#d9a969" />
+                                </g>
+                            </g>
+                        </g>
+                        <path d="M170 338 Q210 326 249 338" stroke="#b6c19f" opacity=".5" />
+                    </svg>
+                    <div class="ground-glow"></div><span class="falling-leaf leaf-one" aria-hidden="true"></span><span
+                        class="falling-leaf leaf-two" aria-hidden="true"></span><span class="falling-leaf leaf-three"
+                        aria-hidden="true"></span>
+                    <p class="bloom-caption">a little love, love for you</p>
+                </div>
+                <article class="love-letter">
+                    <div class="letter-top"><span>A NOTE FROM MY HEART</span><svg aria-hidden="true">
+                            <use href="#heart" />
+                        </svg></div>
+                    <h2 id="letterGreeting"></h2>
+                    <p>If I could give you one thing today, it would be the feeling of knowing how special you are to
+                        me.</p>
+                    <p>Like these flowers, I hope we can let something beautiful grow - one little moment, one laugh,
+                        and one memory at a time.</p>
+                    <p>Thank you for saying yes. I’m looking forward to spending that day with you.</p>
+                    <p class="letter-signature">With love,<br><em>Your Valentine</em></p>
+                    <div class="letter-date"><span> LITTLE INVITATION</span>
+                        <p id="endingDate"></p>
+                    </div>
+                </article>
+            </section>
+            <p class="status" id="status" aria-live="polite"></p><button id="relock" class="unlock" hidden>Lock
+                again</button>
+        </section>
+        <div class="side-note" aria-hidden="true">Clue:<br>If 143 is i love you what is i love you too?</div>
+    </main>
+    <footer class="foot">MADE WITH LOVE · MEANT FOR YOU · Lan </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
